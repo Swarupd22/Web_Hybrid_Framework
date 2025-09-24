@@ -1,21 +1,18 @@
-package com.sample.pages;
+package com.sample.pagesobjects;
 
 import com.sample.actions.WebActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage {
+public class LoginPage extends BasePage {
     WebActions action = new WebActions();
 
-    private WebDriver driver;
-
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
     By username = By.id("user-name");
     By password = By.id("password");
     By loginBtn = By.xpath("//input[@data-test='login-button']");
-
     By cart = By.xpath("//*[@class='shopping_cart_link']");
 
     public void openURL(String URL) throws IllegalAccessException {
