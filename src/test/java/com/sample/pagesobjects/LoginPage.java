@@ -15,28 +15,28 @@ public class LoginPage extends BasePage {
     By loginBtn = By.xpath("//input[@data-test='login-button']");
     By cart = By.xpath("//*[@class='shopping_cart_link']");
 
-    public void openURL(String URL) throws IllegalAccessException {
+    public void openURL(String URL) {
         action.openURL(URL);
         action.implicitWait();
         action.maximizeWindow();
     }
 
-    public void enterUsername(String text) throws IllegalAccessException {
-        action.sendKeys(username,text);
+    public void enterUsername(String name) throws IllegalAccessException {
+        action.sendKeys(username,name);
     }
-    public void enterPassword(String text) throws IllegalAccessException {
-        action.sendKeys(password,text);
-    }
-
-    public void clickLogin(String info) throws Exception {
-        action.Click(loginBtn,info);
+    public void enterPassword(String passcode) throws IllegalAccessException {
+        action.sendKeys(password,passcode);
     }
 
-    public void verifyHomePage(String info) throws IllegalAccessException {
-        action.assertElementVisible(cart,info);
+    public void clickLogin() throws Exception {
+        action.Click(loginBtn);
     }
 
-    public void checkCart(String info) throws IllegalAccessException {
-        action.Click(cart,info);
+    public void verifyHomePage() {
+        action.assertIsElementVisible(cart);
+    }
+
+    public void checkCart() throws IllegalAccessException {
+        action.Click(cart);
     }
 }

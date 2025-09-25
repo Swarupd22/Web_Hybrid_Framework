@@ -36,10 +36,10 @@ public class LoginTest {
         loginPage.enterPassword("secret_sauce");
         log.info("+++++Entered password+++++");
 
-        loginPage.clickLogin("login button");
+        loginPage.clickLogin();
         log.info("+++++Clicked login button+++++");
 
-        loginPage.verifyHomePage("Home Page");
+        loginPage.verifyHomePage();
         log.info("+++++Successfully logged in and navigated to home screen+++++");
     }
 
