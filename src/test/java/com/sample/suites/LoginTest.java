@@ -1,6 +1,7 @@
 package com.sample.suites;
 
 import com.sample.pagesobjects.LoginPage;
+import com.sample.utils.ConfigReader;
 import com.sample.utils.DriverFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +17,7 @@ public class LoginTest {
     @BeforeTest
     public void setUp() throws IllegalAccessException {
         driverFactory = DriverFactory.getInstance();
-        driverFactory.setDriver("chrome");
+        driverFactory.setDriver(ConfigReader.readFromPropFile("browser"));
         driver = driverFactory.getDriver();
         loginPage = new LoginPage(driver);
 
@@ -24,16 +25,16 @@ public class LoginTest {
 
     @Test(priority = 0)
     public void launchBrowser() throws IllegalAccessException {
-        loginPage.openURL("https://www.saucedemo.com/");
+        loginPage.openURL(ConfigReader.readFromPropFile("baseURL"));
         log.info("+++++Browser launched and navigated to sauceDemo website");
     }
 
     @Test(priority = 1)
     public void login() throws Exception {
-        loginPage.enterUsername("standard_user");
+        loginPage.enterUsername(ConfigReader.readFromPropFile("username"));
         log.info("+++++Entered UserName+++++");
 
-        loginPage.enterPassword("secret_sauce");
+        loginPage.enterPassword(ConfigReader.readFromPropFile("password"));
         log.info("+++++Entered password+++++");
 
         loginPage.clickLogin();

@@ -1,5 +1,6 @@
 package com.sample.actions;
 
+import com.sample.utils.ConfigReader;
 import com.sample.utils.DriverFactory;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -17,7 +18,7 @@ import java.util.Set;
 public class WebActions {
 
     public void waitForElementToBeVisible(By locator) throws IllegalAccessException {
-        WebDriverWait wait = new WebDriverWait(DriverFactory.getInstance().getDriver(), Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(DriverFactory.getInstance().getDriver(), Duration.ofSeconds(Long.parseLong(ConfigReader.readFromPropFile("timeout"))));
         wait.pollingEvery(Duration.ofMillis(500));
         try {
             wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
@@ -28,7 +29,7 @@ public class WebActions {
 
     public void waitForElementToBeClickable(By locator) {
         try {
-            WebDriverWait wait = new WebDriverWait(DriverFactory.getInstance().getDriver(), Duration.ofSeconds(30));
+            WebDriverWait wait = new WebDriverWait(DriverFactory.getInstance().getDriver(), Duration.ofSeconds(Long.parseLong(ConfigReader.readFromPropFile("timeout"))));
             wait.until(ExpectedConditions.elementToBeClickable(locator));
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,7 +67,7 @@ public class WebActions {
     }
 
     public void implicitWait() {
-        DriverFactory.getInstance().getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        DriverFactory.getInstance().getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(ConfigReader.readFromPropFile("timeout"))));
     }
 
     public void maximizeWindow() {
@@ -114,7 +115,7 @@ public class WebActions {
     }
 
     public void waitAnClick(By locator) {
-        WebDriverWait wait = new WebDriverWait(DriverFactory.getInstance().getDriver(), Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(DriverFactory.getInstance().getDriver(), Duration.ofSeconds(Long.parseLong(ConfigReader.readFromPropFile("timeout"))));
         try {
             wait.until(ExpectedConditions.elementToBeClickable(locator));
             DriverFactory.getInstance().getDriver().findElement(locator).click();
@@ -138,14 +139,14 @@ public class WebActions {
     }
 
     public void acceptAlert() {
-        WebDriverWait wait = new WebDriverWait(DriverFactory.getInstance().getDriver(), Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(DriverFactory.getInstance().getDriver(), Duration.ofSeconds(Long.parseLong(ConfigReader.readFromPropFile("timeout"))));
         wait.until(ExpectedConditions.alertIsPresent());
         DriverFactory.getInstance().getDriver().switchTo().alert().accept();
         System.out.println("Successfully handled the alert!");
     }
 
     public void dismissAlert() {
-        WebDriverWait wait = new WebDriverWait(DriverFactory.getInstance().getDriver(), Duration.ofSeconds(30));
+        WebDriverWait wait = new WebDriverWait(DriverFactory.getInstance().getDriver(), Duration.ofSeconds(Long.parseLong(ConfigReader.readFromPropFile("timeout"))));
         wait.until(ExpectedConditions.alertIsPresent());
         DriverFactory.getInstance().getDriver().switchTo().alert().dismiss();
         System.out.println("Successfully dismissed the alert!");
