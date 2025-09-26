@@ -25,7 +25,7 @@ public class LoginTest {
 
     @Test(priority = 0)
     public void launchBrowser() throws IllegalAccessException {
-        loginPage.openURL(ConfigReader.readFromPropFile("baseURL"));
+        loginPage.openURL(ConfigReader.readFromPropFile("baseUrl"));
         log.info("+++++Browser launched and navigated to sauceDemo website");
     }
 

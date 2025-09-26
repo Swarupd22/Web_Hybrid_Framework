@@ -52,7 +52,7 @@ public class WebActions {
     public void Click(By locator) throws IllegalAccessException {
         waitForElementToBeVisible(locator);
         DriverFactory.getInstance().getDriver().findElement(locator).click();
-        System.out.println("Successfully clicked");
+        System.out.println("Successfully clicked button");
     }
 
     public void sendKeys(By locator, String text) throws IllegalAccessException {
