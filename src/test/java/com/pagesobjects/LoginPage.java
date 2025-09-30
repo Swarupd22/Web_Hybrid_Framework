@@ -1,6 +1,6 @@
-package com.sample.pagesobjects;
+package com.pagesobjects;
 
-import com.sample.actions.WebActions;
+import com.actions.WebActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 

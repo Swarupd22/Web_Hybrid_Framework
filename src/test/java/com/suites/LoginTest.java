@@ -1,27 +1,27 @@
-package com.sample.suites;
+package com.suites;
 
-import com.sample.pagesobjects.LoginPage;
-import com.sample.utils.ConfigReader;
-import com.sample.utils.DriverFactory;
+import base.BaseTest;
+import com.pagesobjects.LoginPage;
+import com.utils.ConfigReader;
+import com.utils.DriverFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
-@Slf4j
-public class LoginTest {
+import java.io.IOException;
 
-    private DriverFactory driverFactory;
-    private WebDriver driver;
+@Slf4j
+public class LoginTest extends BaseTest {
+
     private LoginPage loginPage;
 
     @BeforeTest
-    public void setUp() throws IllegalAccessException {
-        driverFactory = DriverFactory.getInstance();
-        driverFactory.setDriver(ConfigReader.readFromPropFile("browser"));
-        driver = driverFactory.getDriver();
+    public void init() {
+        WebDriver driver = DriverFactory.getInstance().getDriver();
         loginPage = new LoginPage(driver);
-
     }
+
 
     @Test(priority = 0)
     public void launchBrowser() throws IllegalAccessException {
@@ -44,9 +44,4 @@ public class LoginTest {
         log.info("+++++Successfully logged in and navigated to home screen+++++");
     }
 
-    @AfterTest
-    public void tearDown() throws InterruptedException {
-        Thread.sleep(3000);
-        driverFactory.quitBrowser();
-    }
 }

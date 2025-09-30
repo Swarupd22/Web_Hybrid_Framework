@@ -1,7 +1,7 @@
-package com.sample.actions;
+package com.actions;
 
-import com.sample.utils.ConfigReader;
-import com.sample.utils.DriverFactory;
+import com.utils.ConfigReader;
+import com.utils.DriverFactory;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
