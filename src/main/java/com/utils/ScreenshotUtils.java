@@ -5,7 +5,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DateFormat;
@@ -20,28 +19,22 @@ public class ScreenshotUtils {
     public static String date = dateFormat.format(currentdate);
 
     public static String captureScreenshot(WebDriver driver, String testName) {
-
-        String folderPath = "test-output/screenshots/";
+        String folderPath = System.getProperty("user.dir") + "/test-output/screenshots/";
         String filePath = folderPath + testName + "_" + date + ".png";
 
         try {
-            //Take screenshot as File
-            File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-
-            //Ensure directory exists
             Files.createDirectories(Paths.get(folderPath));
 
-            //Save file
+            File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             Files.copy(src.toPath(), Paths.get(filePath));
 
-            //Base64 version for embedding in reports
+            System.out.println("Screenshot saved at : " + filePath);
+
+            // return base64 for Extent
             byte[] fileContent = Files.readAllBytes(Paths.get(filePath));
-            String encodedBase64 = Base64.getEncoder().encodeToString(fileContent);
+            return Base64.getEncoder().encodeToString(fileContent);
 
-            //Return Data URI (base64) → can be embedded directly in HTML reports
-            return "data:image/png;base64," + encodedBase64;
-
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
